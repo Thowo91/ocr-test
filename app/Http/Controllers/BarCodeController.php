@@ -19,6 +19,9 @@ class BarCodeController extends Controller
     public function file(Request $request)
     {
 
+        if ($request->hasFile('pdfFile')) {
+
+
             $file = $request->file('pdfFile');
 
             // storage/app/public/images
@@ -52,5 +55,8 @@ class BarCodeController extends Controller
             }
 
             return view('barcode.result', compact('codes'));
+        } else {
+            return redirect()->back();
+        }
     }
 }
