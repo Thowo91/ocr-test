@@ -4,4 +4,7 @@ Benötigte Pakete auf dem Server:
 * zbar-tools
 * php-imagick
 
-example File in root
+
+``composer install`` ist der einzige Befehl der ausgeführt werden muss
+
+example File "tickets.pdf" in root
