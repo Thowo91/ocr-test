@@ -21,7 +21,6 @@ class BarCodeController extends Controller
 
         if ($request->hasFile('pdfFile')) {
 
-
             $file = $request->file('pdfFile');
 
             // storage/app/public/images
@@ -37,6 +36,7 @@ class BarCodeController extends Controller
 
             $codes = [];
             $codes['sum'] = 0;
+            $codes['pages'] = $pdf->getNumberOfPages();
 
             for ($i = 1; $i <= $pdf->getNumberOfPages(); $i++) {
                 $file = Storage::disk('pdfFiles')->getAdapter()->getPathPrefix() . $i . '.jpg';
