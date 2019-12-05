@@ -12,6 +12,7 @@
             <div class="form-group">
                 {{ Form::label('pdfFile', 'Gutscheincodes PDF hochladen') }}
                 {{ Form::file('pdfFile', ['class' => 'form-control-file']) }}
+                <div>{{ $errors->first('pdfFile') }}</div>
             </div>
             {{ Form::submit('Upload', ['class' => 'btn btn-primary my-3']) }}
             {{ Form::close() }}

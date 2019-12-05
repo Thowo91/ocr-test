@@ -21,6 +21,10 @@ class BarCodeController extends Controller
 
         if ($request->hasFile('pdfFile')) {
 
+            $request->validate([
+                'pdfFile' => 'mimetypes:application/pdf|max:10000',
+            ]);
+
             $file = $request->file('pdfFile');
 
             // storage/app/public/images
