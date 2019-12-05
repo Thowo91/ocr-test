@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Spatie\PdfToImage\Pdf;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class BarCodeController extends Controller
 {
@@ -50,10 +51,15 @@ class BarCodeController extends Controller
                     ->crop(220, 100, 80)
                     ->save();
 
-                foreach ($zbar->decode($file) as $result) {
-                    $value = intval(substr($result->value, -4, 3)) / 100;
-                    $codes[] = $value;
-                    $codes['sum'] += $value;
+                try {
+                    foreach ($zbar->decode($file) as $result) {
+                        dd($result);
+                        $value = intval(substr($result->value, -4, 3)) / 100;
+                        $codes[] = $value;
+                        $codes['sum'] += $value;
+                    }
+                } catch (ProcessFailedException $e) {
+                    // keine Barcodes gefunden
                 }
                 unlink($file);
             }
